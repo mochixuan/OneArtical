@@ -1,11 +1,11 @@
 import {connect} from 'react-redux'
 import ControlPanelView from '../components/ControlPanelView'
 import {collect, nextArticle, preArticle, randomArticle, todayArticle} from '../action/actions'
-import {control1,control2,others} from '../constants/DataConstants'
+import {CONTROL1,CONTROL2,OTHERS} from '../constants/DataConstants'
 
 const mapStateToProps = (state)=> ({
-    controls: state.article.isToday?control1:[...control1,...control2],
-    others,
+    controls: state.article.isToday?CONTROL1:[...CONTROL1,...CONTROL2],
+    others:OTHERS,
     isCollected: state.article.isCollected
 })
 

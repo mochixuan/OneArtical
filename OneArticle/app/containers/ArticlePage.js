@@ -10,7 +10,7 @@ import {connect} from 'react-redux'
 import Article from '../components/Article'
 import SplashScreen from 'react-native-splash-screen'
 import {REFRESH_ARTICLE_DONE,SPLASH_SHOW} from '../constants/ActionTypes'
-import {todayArticle,hideSplash,changeFontSize} from '../action/actions'
+import {todayArticle,hideSplash,changeFontSize,changeBgColor,changeModel} from '../action/actions'
 import ModalSettings from '../components/ModalSettings'
 
 const {width} = Dimensions.get('window')
@@ -43,11 +43,14 @@ class ArticlePage extends Component {
                     articleFontSize = {this.props.styles.articleFontSize}
                     articleMainColor =  {this.props.styles.articleMainColor}
                     articleSecondColor =  {this.props.styles.articleSecondColor}
+                    dayStyle = {this.props.styles.dayStyle}
                     articleBg =  {this.props.styles.articleBg}/>
                 <View style={styles.modal}>
                     <ModalSettings
                         styles = {this.props.styles}
                         changeFontSize = {this.props.changeFontSize}
+                        changeBgColor = {this.props.changeBgColor}
+                        changeModel = {this.props.changeModel}
                     />
                 </View>
             </View>
@@ -83,6 +86,12 @@ const mapDispatchToProps = (dispatch) => ({
     changeFontSize: (index) => {
         dispatch(changeFontSize(index))
     },
+    changeBgColor: (index) => {
+        dispatch(changeBgColor(index))
+    },
+    changeModel: () => {
+        dispatch(changeModel())
+    }
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ArticlePage)

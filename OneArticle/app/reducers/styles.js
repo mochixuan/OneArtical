@@ -1,20 +1,20 @@
 import {
     FONT_SIZE_SMALL,FONT_SIZE_MIDDLE,FONT_SIZE_LARGE,
     MAIN_BG_1,MAIN_BG_2,MAIN_BG_3,MAIN_BG_4,
-    STYLE_DAT,STYLE_NIGHT
+    CHANGE_MODEL,
 } from '../constants/ActionTypes'
+import {MAIN_BGS} from '../constants/DataConstants'
 
-const MAIN_BGS = ['#f7f7f7','#7bf8ad','#ffd774','#ffc0b4']
 const ARTICLE_MAIN_COLOR = '#000000'
 const ARTICLE_SECOND_COLOR = '#808080'
-const NIGHT_ARTICLE_COLOR = '#e0e0e0'
+const NIGHT_ARTICLE_FONT_COLOR = '#656766'
+const NIGHT_ARTICLE_BG_COLOR = '#313639'
 
 //随机应变 逻辑完全和原app一样
 const initialState = {
     articleFontSize: 18,
     fontSizeIndex: 1,
     articleBg: '#f7f7f7',
-    bgIndex: 0,
     articleMainColor: ARTICLE_MAIN_COLOR,
     articleSecondColor: ARTICLE_SECOND_COLOR,
     articleBgStyleIndex: 0,
@@ -44,7 +44,6 @@ export default styles = (state = initialState,action) => {
                 dayStyle: true,
                 articleMainColor: ARTICLE_MAIN_COLOR,
                 articleBg: MAIN_BGS[0],
-                bgIndex: 0,
                 articleBgStyleIndex: 0,
             })
         case MAIN_BG_2:
@@ -52,7 +51,6 @@ export default styles = (state = initialState,action) => {
                 dayStyle: true,
                 articleMainColor: ARTICLE_MAIN_COLOR,
                 articleBg: MAIN_BGS[1],
-                bgIndex: 1,
                 articleBgStyleIndex: 1,
 
             })
@@ -61,7 +59,6 @@ export default styles = (state = initialState,action) => {
                 dayStyle: true,
                 articleMainColor: ARTICLE_MAIN_COLOR,
                 articleBg: MAIN_BGS[2],
-                bgIndex: 2,
                 articleBgStyleIndex: 2,
             })
         case MAIN_BG_4:
@@ -69,20 +66,21 @@ export default styles = (state = initialState,action) => {
                 dayStyle: true,
                 articleMainColor: ARTICLE_MAIN_COLOR,
                 articleBg: MAIN_BGS[3],
-                bgIndex: 3,
                 articleBgStyleIndex: 3,
             })
-        case STYLE_DAT:
+        case CHANGE_MODEL:
+            let dayStyle = true
+            let articleMainColor = ARTICLE_MAIN_COLOR
+            let articleBg = MAIN_BGS[state.articleBgStyleIndex]
+            if (state.dayStyle) {
+                dayStyle = false
+                articleMainColor = NIGHT_ARTICLE_FONT_COLOR,
+                articleBg =  NIGHT_ARTICLE_BG_COLOR
+            }
             return Object.assign({},state,{
-                dayStyle: true,
-                articleMainColor: ARTICLE_MAIN_COLOR,
-                articleBg: MAIN_BGS[state.articleBgStyleIndex],
-            })
-        case STYLE_NIGHT:
-            return Object.assign({},state,{
-                dayStyle: false,
-                articleMainColor: NIGHT_ARTICLE_COLOR,
-                articleBg: '#5d7986'
+                dayStyle,
+                articleMainColor,
+                articleBg,
             })
     }
 

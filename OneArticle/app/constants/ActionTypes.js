@@ -21,8 +21,4 @@ export const MAIN_BG_2 = "MAIN_BG_2"
 export const MAIN_BG_3 = "MAIN_BG_3"
 export const MAIN_BG_4 = "MAIN_BG_4"
 
-export const STYLE_DAT = "STYLE_DAT"
-export const STYLE_NIGHT = "STYLE_NIGHT"
-
-export const SETTINGS_SAME_DAY = "SETTINGS_SAME_DAY"
-export const SETTINGS_NO_SAME_DAY = "SETTINGS_NO_SAME_DAY"
+export const CHANGE_MODEL = "CHANGE_MODEL"

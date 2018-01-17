@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Image,
 } from 'react-native'
-import {ParallaxScrollView,DEFAULT_NAVBAR_HEIGHT} from './ParallaxScrollView'
+import {ParallaxScrollView,DEFAULT_NAVBAR_HEIGHT} from '../widget/ParallaxScrollView'
 
 const {width,height}  = Dimensions.get('window')
 
@@ -30,6 +30,7 @@ export default class Article extends Component {
 
     _renderMainView() {
         let mainView = <View style={[styles.constants_empty,{backgroundColor: this.props.articleBg}]}/>
+        let maskLineColor = this.props.dayStyle?'#dcdcdc':'#454746'
         if (this.props.articleData != null) {
             mainView = (
                 <View style={[styles.constants,{
@@ -38,7 +39,7 @@ export default class Article extends Component {
                         fontSize: this.props.articleFontSize+4,
                         color: this.props.articleMainColor
                     }]}>{this.props.articleData.title}</Text>
-                    <View style={styles.mask}/>
+                    <View style={[styles.mask,{backgroundColor:maskLineColor}]}/>
                     <Text style={[styles.author,{
                         fontSize: this.props.articleFontSize-4,
                         color: this.props.articleSecondColor
@@ -48,7 +49,7 @@ export default class Article extends Component {
                         color: this.props.articleMainColor,
                         lineHeight: this.props.articleFontSize*1.6
                     }]}>{this.analysisContent(this.props.articleData.content)}</Text>
-                    <View style={styles.mask}/>
+                    <View style={[styles.mask,{backgroundColor:maskLineColor}]}/>
                     <Text style={{
                         width,
                         height: 42,

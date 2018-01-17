@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types';
 
-export default class SelectorView extends View {
+export default class FontSelectorView extends View {
 
     render() {
 
@@ -54,7 +54,6 @@ export default class SelectorView extends View {
         )
     }
 
-
     changeBgPosition() {
         this.text0 = this.props.defaultTextColor
         this.text1 = this.props.defaultTextColor
@@ -80,7 +79,7 @@ export default class SelectorView extends View {
 
 }
 
-SelectorView.defaultProps = {
+FontSelectorView.defaultProps = {
     bgColor: '#333333',
     defaultBgColor: '#333333',
     textColor: '#f5f5f5',
@@ -88,12 +87,13 @@ SelectorView.defaultProps = {
     curIndex: 0,
 }
 
-SelectorView.propTypes =  {
+FontSelectorView.propTypes =  {
     bgColor: PropTypes.string,
     defaultBgColor: PropTypes.string,
     onChangeItem: PropTypes.func,
     defaultTextColor: PropTypes.string,
     textColor: PropTypes.string,
+    fontItems: PropTypes.func,
     curIndex: PropTypes.number,
 }
 
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     text: {
         width: 50,
         fontSize: 16,
-        height: 29.5,
+        height: 30,
         lineHeight: 24,
         textAlign: 'center',
         borderRightWidth: 1,

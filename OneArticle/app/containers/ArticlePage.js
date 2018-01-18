@@ -4,13 +4,13 @@ import {
     View,
     Text,
     StatusBar,
-    Dimensions
+    Dimensions,
 } from 'react-native'
 import {connect} from 'react-redux'
 import Article from '../components/Article'
 import SplashScreen from 'react-native-splash-screen'
 import {REFRESH_ARTICLE_DONE,SPLASH_SHOW} from '../constants/ActionTypes'
-import {todayArticle,hideSplash,changeFontSize,changeBgColor,changeModel} from '../action/actions'
+import {todayArticle,hideSplash,changeFontSize,changeBgColor,switchThemeModel,switchStylesModalState} from '../action/actions'
 import ModalSettings from '../components/ModalSettings'
 
 const {width} = Dimensions.get('window')
@@ -50,7 +50,7 @@ class ArticlePage extends Component {
                         styles = {this.props.styles}
                         changeFontSize = {this.props.changeFontSize}
                         changeBgColor = {this.props.changeBgColor}
-                        changeModel = {this.props.changeModel}
+                        switchThemeModel = {this.props.switchThemeModel}
                     />
                 </View>
             </View>
@@ -89,8 +89,11 @@ const mapDispatchToProps = (dispatch) => ({
     changeBgColor: (index) => {
         dispatch(changeBgColor(index))
     },
-    changeModel: () => {
-        dispatch(changeModel())
+    switchThemeModel: () => {
+        dispatch(switchThemeModel())
+    },
+    switchStylesModalState: (isShow)=>{
+       dispatch(switchStylesModalState(isShow))
     }
 })
 

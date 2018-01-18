@@ -1,7 +1,7 @@
 import {
     FONT_SIZE_SMALL,FONT_SIZE_MIDDLE,FONT_SIZE_LARGE,
     MAIN_BG_1,MAIN_BG_2,MAIN_BG_3,MAIN_BG_4,
-    CHANGE_MODEL,
+    SWITCH_THEME_MODEL,SWITCH_STYLES_MODAL_STATE,
 } from '../constants/ActionTypes'
 import {MAIN_BGS} from '../constants/DataConstants'
 
@@ -11,7 +11,9 @@ const NIGHT_ARTICLE_FONT_COLOR = '#656766'
 const NIGHT_ARTICLE_BG_COLOR = '#313639'
 
 //随机应变 逻辑完全和原app一样
+//把是否显示放在这里只是徒方便
 const initialState = {
+    showStylesModal: false,
     articleFontSize: 18,
     fontSizeIndex: 1,
     articleBg: '#f7f7f7',
@@ -68,7 +70,7 @@ export default styles = (state = initialState,action) => {
                 articleBg: MAIN_BGS[3],
                 articleBgStyleIndex: 3,
             })
-        case CHANGE_MODEL:
+        case SWITCH_THEME_MODEL:
             let dayStyle = true
             let articleMainColor = ARTICLE_MAIN_COLOR
             let articleBg = MAIN_BGS[state.articleBgStyleIndex]
@@ -81,6 +83,10 @@ export default styles = (state = initialState,action) => {
                 dayStyle,
                 articleMainColor,
                 articleBg,
+            })
+        case SWITCH_STYLES_MODAL_STATE:
+            return Object.assign({},state,{
+                showStylesModal: action.showStylesModal
             })
     }
 

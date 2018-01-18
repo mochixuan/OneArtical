@@ -142,9 +142,15 @@ class ParallaxScrollView extends Component {
                     }}
                     {...props}
                     style={styles.scrollView}
-                    onScroll={Animated.event([
+                    /*onScroll={Animated.event([
                         { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
-                    ])}
+                    ])}*/
+                    onScroll={()=>{
+                        console.log('----------------')
+                        Animated.event([
+                            { nativeEvent: { contentOffset: { y: this.state.scrollY } } }
+                        ])
+                    }}
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                     overScrollMode='never'

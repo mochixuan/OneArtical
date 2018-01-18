@@ -5,7 +5,7 @@
  * 尽量将逻辑层和视图层分开
  * */
 import {COLLECT_ARTICLE,SAGA_TODAY_ARTICLE,SAGA_NEXT_ARTICLE,SAGA_PREV_ARTICLE,SAGA_RANDOM_ARTICLE,SPLASH_HIDE,SPLASH_SHOW,CHANGE_ARTICLE,
-    FONT_SIZE_SMALL,FONT_SIZE_MIDDLE,FONT_SIZE_LARGE,MAIN_BG_1,MAIN_BG_2,MAIN_BG_3,MAIN_BG_4,CHANGE_MODEL
+    FONT_SIZE_SMALL,FONT_SIZE_MIDDLE,FONT_SIZE_LARGE,MAIN_BG_1,MAIN_BG_2,MAIN_BG_3,MAIN_BG_4,SWITCH_THEME_MODEL,SWITCH_STYLES_MODAL_STATE
 } from '../constants/ActionTypes'
 
 export const collect = () => ({
@@ -53,8 +53,13 @@ export const changeBgColor = (index) => {
     }
 }
 
-export const changeModel = () => ({
-    type: CHANGE_MODEL
+export const switchThemeModel = () => ({
+    type: SWITCH_THEME_MODEL
+})
+
+export const switchStylesModalState = (isShow) => ({
+    type: SWITCH_STYLES_MODAL_STATE,
+    showStylesModal: isShow,
 })
 
 export const hideSplash = () => ({

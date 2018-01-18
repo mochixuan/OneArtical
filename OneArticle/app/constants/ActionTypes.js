@@ -21,4 +21,5 @@ export const MAIN_BG_2 = "MAIN_BG_2"
 export const MAIN_BG_3 = "MAIN_BG_3"
 export const MAIN_BG_4 = "MAIN_BG_4"
 
-export const CHANGE_MODEL = "CHANGE_MODEL"
+export const SWITCH_THEME_MODEL = "SWITCH_THEME_MODEL"
+export const SWITCH_STYLES_MODAL_STATE = "SWITCH_STYLES_MODAL_STATE"

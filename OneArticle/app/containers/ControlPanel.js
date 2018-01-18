@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import ControlPanelView from '../components/ControlPanelView'
-import {collect, nextArticle, preArticle, randomArticle, todayArticle} from '../action/actions'
+import {collect, nextArticle, preArticle, randomArticle, todayArticle,switchStylesModalState} from '../action/actions'
 import {CONTROL1,CONTROL2,OTHERS} from '../constants/DataConstants'
 
 const mapStateToProps = (state)=> ({
@@ -23,7 +23,6 @@ const dealtClickItem = (dispatch,key,ownProps) => {
             dispatch(collect())
             break
         case 1:
-
             break
         case 2:
             dispatch(preArticle())
@@ -41,6 +40,7 @@ const dealtClickItem = (dispatch,key,ownProps) => {
             ownProps.navigation.navigate('CollectPage')
             break
         case 7:
+            dispatch(switchStylesModalState(true))
             break
         case 8:
             break

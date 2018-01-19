@@ -2,7 +2,6 @@ import React,{Component} from 'react'
 import {
     View,
     StyleSheet,
-    Modal,
     Text,
     Dimensions,
     Animated
@@ -19,7 +18,13 @@ export default class ModalSettings extends Component {
 
     render() {
         return (
-            <ModalView isShow={this.props.styles.showStylesModal} height={210}>
+            <ModalView
+                isShow={this.props.styles.showStylesModal}
+                height={210}
+                onTouchOutSide = {()=>{
+                    this.props.switchStylesModalState(false)
+                }}
+            >
                 <View style={[styles.container,{backgroundColor: this.props.styles.articleBg}]}>
                     <View style={styles.item_view}>
                         <Text style={styles.item_descri}>字号</Text>
@@ -64,9 +69,6 @@ export default class ModalSettings extends Component {
 }
 
 const styles = StyleSheet.create({
-    modal: {
-        height: 210,
-    },
     container: {
         height: 210,
         alignItems: 'center',

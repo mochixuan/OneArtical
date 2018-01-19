@@ -43,16 +43,16 @@ class ArticlePage extends Component {
                     articleFontSize = {this.props.styles.articleFontSize}
                     articleMainColor =  {this.props.styles.articleMainColor}
                     articleSecondColor =  {this.props.styles.articleSecondColor}
+                    showStylesModal = {this.props.styles.showStylesModal}
                     dayStyle = {this.props.styles.dayStyle}
                     articleBg =  {this.props.styles.articleBg}/>
-                <View style={styles.modal}>
-                    <ModalSettings
-                        styles = {this.props.styles}
-                        changeFontSize = {this.props.changeFontSize}
-                        changeBgColor = {this.props.changeBgColor}
-                        switchThemeModel = {this.props.switchThemeModel}
-                    />
-                </View>
+                <ModalSettings
+                    styles = {this.props.styles}
+                    changeFontSize = {this.props.changeFontSize}
+                    changeBgColor = {this.props.changeBgColor}
+                    switchThemeModel = {this.props.switchThemeModel}
+                    switchStylesModalState = {this.props.switchStylesModalState}
+                />
             </View>
         )
     }
@@ -63,10 +63,6 @@ const styles = StyleSheet.create({
     container: {
         width,
         flex: 1,
-    },
-    modal: {
-        position: 'absolute',
-        bottom: 0,
     }
 })
 
@@ -94,7 +90,7 @@ const mapDispatchToProps = (dispatch) => ({
     },
     switchStylesModalState: (isShow)=>{
        dispatch(switchStylesModalState(isShow))
-    }
+    },
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ArticlePage)

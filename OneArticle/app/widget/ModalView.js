@@ -3,9 +3,12 @@ import {
     StyleSheet,
     Animated,
     Easing,
-    Dimensions
+    Dimensions,
+    PanResponder,
+    View,
+    Modal
 } from 'react-native'
-const {width} = Dimensions.get('window')
+const {width,height} = Dimensions.get('window')
 
 import PropTypes from 'prop-types';
 
@@ -16,6 +19,21 @@ export default class ModalView extends Component {
         this.state = {
             slide: new Animated.Value(0)
         }
+    }
+
+    componentWillMount() {
+        this._panResponder = PanResponder.create({
+            // 要求成为响应者
+            onStartShouldSetPanResponder: (evt,gestureState) => true,
+            //如果某个父View想要在触摸操作开始时阻止子组件成为响应者
+            //onStartShouldSetPanResponderCapture: (evt,gestureState) => false,
+            //开始手势操作
+            onPanResponderGrant: (evt, gestureState) => {
+                if (this.props.onTouchOutSide) {
+                    this.props.onTouchOutSide()
+                }
+            }
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -42,20 +60,45 @@ export default class ModalView extends Component {
 
     render() {
         return (
-            <Animated.View
+            /*<Animated.View
                 style={[styles.container,{
                     transform: [
                         {
                             translateY: this.state.slide.interpolate({
                                 inputRange: [0,1],
-                                outputRange: [this.props.height,0]
+                                outputRange: [height,0]
                             })
                         }
                     ]
                 }]}
+                {...this._panResponder.panHandlers}
             >
-                {this.props.children}
-            </Animated.View>
+                <View style={styles.children}>
+                    {this.props.children}
+                </View>
+            </Animated.View>*/
+            <Modal style={styles.container}
+                   visible={this.props.isShow}
+                   transparent = {true}
+                   onRequestClose={()=>{
+
+                   }}>
+
+                <View  style={[styles.mask,{height:height-this.props.height}]} {...this._panResponder.panHandlers}/>
+                <Animated.View
+                    style={[styles.children,{
+                        transform: [
+                            {
+                                translateY: this.state.slide.interpolate({
+                                    inputRange: [0,1],
+                                    outputRange: [this.props.height,0]
+                                })
+                            }
+                        ]
+                    }]}>
+                        {this.props.children}
+                </Animated.View>
+            </Modal>
         )
     }
 
@@ -65,17 +108,27 @@ export default class ModalView extends Component {
 
 ModalView.defaultProps = {
     isShow: false,
-    height: 200,
 }
 
 ModalView.propTypes = {
     isShow: PropTypes.bool,
-    height: PropTypes.number
+    height: PropTypes.number,
+    onTouchOutSide: PropTypes.func
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        width
+        width,
+        height,
+        backgroundColor: '#f00'
+    },
+    mask: {
+        width,
+        //必须要设置一个颜色
+        backgroundColor: 'transparent'
+    },
+    children: {
+        position: 'absolute',
+        bottom: 0,
     }
 })

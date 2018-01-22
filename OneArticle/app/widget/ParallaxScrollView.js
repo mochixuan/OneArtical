@@ -16,6 +16,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const DEFAULT_WINDOW_MULTIPLIER = 0.50;
 const DEFAULT_NAVBAR_HEIGHT = 40; //解决iOS通知栏透明问题
+import LoadingView from './LoadingView'
 
 class ParallaxScrollView extends Component {
     constructor() {
@@ -50,29 +51,38 @@ class ParallaxScrollView extends Component {
     }
 
     renderNavBarTitle() {
-        var { windowHeight, navBarTitleColor } = this.props;
-        var { scrollY } = this.state;
-        if (!windowHeight) {
-            return null;
-        }
+        if (this.props.isShowLoading) {
+            return (
+                <LoadingView
+                    height={DEFAULT_NAVBAR_HEIGHT}
+                    backgroundColor={this.props.navBarColor}
+                />
+            )
+        } else {
+            var { windowHeight, navBarTitleColor } = this.props;
+            var { scrollY } = this.state;
+            if (!windowHeight) {
+                return null;
+            }
 
-        return (
-            <Animated.View
-                style={{
-                    opacity: scrollY.interpolate({
-                        inputRange: [-windowHeight, windowHeight * DEFAULT_WINDOW_MULTIPLIER, windowHeight * 0.8],
-                        outputRange: [0, 0, 1]
-                    })
-                }}
-            >
-                <Text style={{ fontSize: 14, color: navBarTitleColor || 'white' }}>
-                    {this.props.navBarTitle}
-                </Text>
-            </Animated.View>
-        );
+            return (
+                <Animated.View
+                    style={{
+                        opacity: scrollY.interpolate({
+                            inputRange: [-windowHeight, windowHeight * DEFAULT_WINDOW_MULTIPLIER, windowHeight * 0.8],
+                            outputRange: [0, 0, 1]
+                        })
+                    }}
+                >
+                    <Text style={{ fontSize: 14, color: navBarTitleColor || 'white' }}>
+                        {this.props.navBarTitle}
+                    </Text>
+                </Animated.View>
+            );
+        }
     }
 
-    rendernavBar() {
+    renderNavBar() {
         var {
             windowHeight, leftView,
             rightView, navBarColor
@@ -110,7 +120,8 @@ class ParallaxScrollView extends Component {
                         flex: 5,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        alignSelf: 'center'
+                        alignSelf: 'center',
+                        height: DEFAULT_NAVBAR_HEIGHT,
                     }}
                 >
                     {this.renderNavBarTitle()}
@@ -135,7 +146,7 @@ class ParallaxScrollView extends Component {
 
         return (
             <View style={[styles.container, style]}>
-                {this.rendernavBar()}
+                {this.renderNavBar()}
                 <ScrollView
                     ref={component => {
                         this._scrollView = component;
@@ -163,6 +174,7 @@ class ParallaxScrollView extends Component {
 
 ParallaxScrollView.defaultProps = {
     windowHeight: SCREEN_HEIGHT * DEFAULT_WINDOW_MULTIPLIER,
+    isShowLoading: false,
 };
 
 ParallaxScrollView.propTypes = {
@@ -175,6 +187,7 @@ ParallaxScrollView.propTypes = {
     headerView: PropTypes.node,
     leftView: PropTypes.element,
     rightView: PropTypes.element,
+    isShowLoading: PropTypes.bool
 };
 
 var styles = StyleSheet.create({
@@ -214,7 +227,7 @@ var styles = StyleSheet.create({
         color: 'red',
         textAlign: 'center',
         fontWeight: 'bold'
-    }
+    },
 });
 
 export {ParallaxScrollView,DEFAULT_NAVBAR_HEIGHT}

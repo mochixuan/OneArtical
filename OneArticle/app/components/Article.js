@@ -19,6 +19,7 @@ export default class Article extends Component {
                 windowHeight={DEFAULT_NAVBAR_HEIGHT}
                 navBarTitle={this.getArticleTitle()}
                 navBarColor={this.props.articleBg}
+                isShowLoading={this.props.isLoading}
                 navBarTitleColor = {this.props.articleSecondColor}
                 //leftView={this._renderNavBarLeftView()}
                 //rightView={this._renderNavBarRightView()}
@@ -95,6 +96,8 @@ export default class Article extends Component {
     getArticleTitle() {
         if (this.props.articleData == null) {
             return ""
+        } else if (this.props.isLoading) {
+            return "* * *"
         }
         return this.props.articleData.title
     }

@@ -9,7 +9,7 @@ import {
 import {connect} from 'react-redux'
 import Article from '../components/Article'
 import SplashScreen from 'react-native-splash-screen'
-import {REFRESH_ARTICLE_DONE,SPLASH_SHOW} from '../constants/ActionTypes'
+import {REFRESH_ARTICLE_DONE,SPLASH_SHOW,REFRESH_ARTICLE_DOING} from '../constants/ActionTypes'
 import {todayArticle,hideSplash,changeFontSize,changeBgColor,switchThemeModel,switchStylesModalState} from '../action/actions'
 import ModalSettings from '../components/ModalSettings'
 
@@ -44,6 +44,7 @@ class ArticlePage extends Component {
                     articleMainColor =  {this.props.styles.articleMainColor}
                     articleSecondColor =  {this.props.styles.articleSecondColor}
                     showStylesModal = {this.props.styles.showStylesModal}
+                    isLoading = {this.props.article.status == REFRESH_ARTICLE_DOING}
                     dayStyle = {this.props.styles.dayStyle}
                     articleBg =  {this.props.styles.articleBg}/>
                 <ModalSettings

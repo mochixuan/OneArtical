@@ -1,8 +1,6 @@
 import React,{Component} from 'react'
 import {
     StyleSheet,
-    Animated,
-    Easing,
     Dimensions,
     PanResponder,
     View,
@@ -13,13 +11,6 @@ const {width,height} = Dimensions.get('window')
 import PropTypes from 'prop-types';
 
 export default class ModalView extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            slide: new Animated.Value(0)
-        }
-    }
 
     componentWillMount() {
         this._panResponder = PanResponder.create({
@@ -36,68 +27,19 @@ export default class ModalView extends Component {
         })
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.isShow) {
-            Animated.timing(
-                this.state.slide,
-                {
-                    toValue: 1,
-                    easing: Easing.linear,
-                    useNativeDriver:true,
-                }
-            ).start()
-        } else {
-            Animated.timing(
-                this.state.slide,
-                {
-                    toValue: 0,
-                    easing: Easing.linear,
-                    useNativeDriver:true,
-                }
-            ).start()
-        }
-    }
-
     render() {
         return (
-            /*<Animated.View
-                style={[styles.container,{
-                    transform: [
-                        {
-                            translateY: this.state.slide.interpolate({
-                                inputRange: [0,1],
-                                outputRange: [height,0]
-                            })
-                        }
-                    ]
-                }]}
-                {...this._panResponder.panHandlers}
-            >
-                <View style={styles.children}>
-                    {this.props.children}
-                </View>
-            </Animated.View>*/
             <Modal style={styles.container}
+                   animationType = {"slide"}
                    visible={this.props.isShow}
                    transparent = {true}
                    onRequestClose={()=>{
 
                    }}>
-
                 <View  style={[styles.mask,{height:height-this.props.height}]} {...this._panResponder.panHandlers}/>
-                <Animated.View
-                    style={[styles.children,{
-                        transform: [
-                            {
-                                translateY: this.state.slide.interpolate({
-                                    inputRange: [0,1],
-                                    outputRange: [this.props.height,0]
-                                })
-                            }
-                        ]
-                    }]}>
-                        {this.props.children}
-                </Animated.View>
+                <View style={styles.children}>
+                    {this.props.children}
+                </View>
             </Modal>
         )
     }

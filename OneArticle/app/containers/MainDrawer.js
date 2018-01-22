@@ -14,7 +14,7 @@ class MainDrawer extends Component {
     render() {
         return (
             <Drawer
-                side= 'left'
+                side= 'right'
                 ref = {(c)=> this.drawer = c}
                 openDrawerOffset = {0.6}
                 panOpenMask={0.16}

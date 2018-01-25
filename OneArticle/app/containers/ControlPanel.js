@@ -43,6 +43,7 @@ const dealtClickItem = (dispatch,key,ownProps) => {
             dispatch(switchStylesModalState(true))
             break
         case 8:
+            ownProps.navigation.navigate('AuthorPage')
             break
     }
 }

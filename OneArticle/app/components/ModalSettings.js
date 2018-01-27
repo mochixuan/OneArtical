@@ -7,16 +7,25 @@ import {
     Dimensions,
     Animated,
     TouchableOpacity,
+    Clipboard,
 } from 'react-native'
 import FontSelectorView from '../widget/FontSelectorView'
 import BgSelectorView from '../widget/BgSelectorView'
 import Switch from '../widget/Switch'
 import {MAIN_BGS,SHOW_STYLE_SETTING_MODAL,NO_SHOW_MODAL,SHOW_SHARE_MODAL} from '../constants/DataConstants'
 import ModalView from '../widget/ModalView'
+import * as WetChatShare from 'react-native-wechat'
+import {show} from '../utils/ToastUtils'
+const resolveAssetSource = require('resolveAssetSource');
 
 const {width} = Dimensions.get('window')
 
+
 export default class ModalSettings extends Component {
+
+    componentWillMount() {
+
+    }
 
     render() {
         const modalState = this.props.styles.modalState
@@ -74,13 +83,85 @@ export default class ModalSettings extends Component {
         )
     }
 
+    //静态注册，用的时候再初始化
+    shareToWeChat(isWeChat) {
+        this.props.switchStylesModalState(NO_SHOW_MODAL)
+        const article = this.props.articleData;
+        if (article == null) {
+            show("无文章分享")
+            return
+        }
+        if (this.isInitShare == null) {
+            this.isInitShare = true
+            WetChatShare.registerApp("wxb808075ab1e17922")
+        }
+        WetChatShare.isWXAppInstalled()
+            .then((isInstalled)=>{
+                if (!isInstalled) {
+                    show("未检测到微信客户端")
+                    return
+                }
+                //没办法使用fiddler抓取数据时发现没有带网页版的url应该是客户端转码的，暂时无法解码，就给自己打个广告了
+                const options = {
+                    type: 'news',
+                    thumbImage: resolveAssetSource(require('../data/img/icon.png')).uri,
+                    webpageUrl: 'https://fir.im/gc58',
+                    title: "OneArticle",
+                    //description: "不用登录注册，没有复杂的算法，不猜你喜欢。和你一样我们喜欢简单，相信优美文字的力量，并乐于坚持。",
+                    description: "原版名为:观止 可去应用市场下载。此为练习Redux全家桶的项目,作者: MoChiXuan。",
+                }
+                if (isWeChat) {
+                    WetChatShare.shareToSession(options)
+                        .then((data)=>{
+                            show("分享成功: "+data)
+                        }).catch((error)=>{
+                            show("分享失败: "+error)
+                        })
+                } else {
+                    WetChatShare.shareToTimeline(options)
+                        .then((data)=>{
+                            show("分享成功: "+data)
+                        }).catch((error)=>{
+                        show("分享失败: "+error)
+                    })
+                }
+            })
+
+    }
+
+    getArticleToClipboard() {
+        this.props.switchStylesModalState(NO_SHOW_MODAL)
+        const article = this.props.articleData;
+        if (article == null) {
+            show("无文章复制")
+        } else {
+            const clipArticleData = article.title
+                .concat('\n\n')
+                .concat(`作者: ${article.author}`)
+                .concat('\n\n')
+                .concat(this.analysisContent(article.content))
+                .concat("")
+            clipArticleData.concat()
+            Clipboard.setString(clipArticleData)
+            show("复制成功")
+        }
+    }
+
+    analysisContent(content) {
+        return content.split('<p>')
+            .map((item)=> "        "+item)
+            .join('')
+            .split('</p>')
+            .join("\n\n");
+    }
+
     _renderShareView() {
         return (
             <View style={[styles.container,{backgroundColor: this.props.styles.articleBg}]}>
                 <Text style={styles.share_title}>分享</Text>
                 <View style={styles.share_view}>
                     <TouchableOpacity onPress={()=>{
-
+                        this.shareToWeChat(false)
                     }}>
                         <View style={styles.share_item}>
                             <Image style={styles.share_icon} source={require('../data/img/wechat_moment.png')}/>
@@ -88,7 +169,7 @@ export default class ModalSettings extends Component {
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{
-
+                        this.shareToWeChat(true)
                     }}>
                         <View style={styles.share_item}>
                             <Image style={styles.share_icon} source={require('../data/img/wechat.png')}/>
@@ -96,7 +177,7 @@ export default class ModalSettings extends Component {
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{
-
+                        this.getArticleToClipboard()
                     }}>
                         <View style={styles.share_item}>
                             <Image style={styles.share_icon} source={require('../data/img/copy.png')}/>
@@ -107,6 +188,8 @@ export default class ModalSettings extends Component {
             </View>
         )
     }
+
+
 
 }
 

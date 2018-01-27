@@ -51,6 +51,7 @@ class ArticlePage extends Component {
                     changeFontSize = {this.props.changeFontSize}
                     changeBgColor = {this.props.changeBgColor}
                     switchThemeModel = {this.props.switchThemeModel}
+                    articleData = {this.props.article.articleData == null?null:this.props.article.articleData.data}
                     switchStylesModalState = {this.props.switchStylesModalState}
                 />
             </View>

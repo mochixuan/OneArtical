@@ -10,6 +10,10 @@ const {width,height} = Dimensions.get('window')
 
 import PropTypes from 'prop-types';
 
+/**
+ * 可以使用下面这个控件进行替代，但这里用自己的方法简单的实现了
+ * yarn add react-native-popup-dialog
+ */
 export default class ModalView extends Component {
 
     componentWillMount() {

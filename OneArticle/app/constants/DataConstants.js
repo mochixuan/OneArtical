@@ -15,3 +15,7 @@ export const OTHERS = [
 ]
 
 export const MAIN_BGS = ['#f7f7f7','#7bf8ad','#ffd774','#ffc0b4']
+
+export const NO_SHOW_MODAL = 0
+export const SHOW_STYLE_SETTING_MODAL = 1
+export const SHOW_SHARE_MODAL = 2

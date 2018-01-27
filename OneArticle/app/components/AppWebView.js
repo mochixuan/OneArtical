@@ -22,6 +22,10 @@ export default class AppWebView extends Component {
     }
 
     componentWillMount() {
+        this.addBackAndroidListener(this.props.navigation)
+    }
+
+    componentWillUnMount() {
 
     }
 
@@ -47,7 +51,6 @@ export default class AppWebView extends Component {
 
     //监听原生返回键事件
     addBackAndroidListener(e) {
-        console.log('==============',e)
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress',this.onBackAndroid)
         }
@@ -55,7 +58,7 @@ export default class AppWebView extends Component {
 
     onBackAndroid = () => {
         if (this.state.canGoBack) {
-            this.refs['webView'].goBack();
+            this.refs[WEB_VIEW].goBack();
             return true;
         } else {
             return false;
@@ -93,7 +96,6 @@ export default class AppWebView extends Component {
 
     //导航栏改变: 导航状态发生改变时，如：(加载完成，加载中，加载错误)
     onNavigationStateChange(e) {
-        console.log('-------',e)
         this.setState({
             canGoBack: e.canGoBack
         })

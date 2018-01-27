@@ -3,7 +3,7 @@ import {
     MAIN_BG_1,MAIN_BG_2,MAIN_BG_3,MAIN_BG_4,
     SWITCH_THEME_MODEL,SWITCH_STYLES_MODAL_STATE,
 } from '../constants/ActionTypes'
-import {MAIN_BGS} from '../constants/DataConstants'
+import {MAIN_BGS,NO_SHOW_MODAL} from '../constants/DataConstants'
 
 const ARTICLE_MAIN_COLOR = '#000000'
 const ARTICLE_SECOND_COLOR = '#808080'
@@ -13,7 +13,7 @@ const NIGHT_ARTICLE_BG_COLOR = '#313639'
 //随机应变 逻辑完全和原app一样
 //把是否显示放在这里只是徒方便
 const initialState = {
-    showStylesModal: false,
+    modalState: NO_SHOW_MODAL,
     articleFontSize: 18,
     fontSizeIndex: 1,
     articleBg: '#f7f7f7',
@@ -86,7 +86,7 @@ export default styles = (state = initialState,action) => {
             })
         case SWITCH_STYLES_MODAL_STATE:
             return Object.assign({},state,{
-                showStylesModal: action.showStylesModal
+                modalState: action.modalState
             })
     }
 

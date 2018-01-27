@@ -57,7 +57,7 @@ export default class Article extends Component {
                         fontSize: this.props.articleFontSize-4,
                         lineHeight: 17+this.props.articleFontSize/2,
                         textAlign: 'center',
-                    }}>全文完  共{this.getContentLength(this.props.articleData.content)}字</Text>
+                    }}>全文完  共{this.props.articleData.wc}字</Text>
                 </View>
             )
         }
@@ -108,14 +108,6 @@ export default class Article extends Component {
                     .join('')
                     .split('</p>')
                     .join("\n\n");
-    }
-
-    getContentLength(content) {
-        return content.split('<p>')
-            .join('')
-            .split('</p>')
-            .join('')
-            .length
     }
 
 }

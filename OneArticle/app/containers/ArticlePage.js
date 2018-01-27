@@ -43,7 +43,6 @@ class ArticlePage extends Component {
                     articleFontSize = {this.props.styles.articleFontSize}
                     articleMainColor =  {this.props.styles.articleMainColor}
                     articleSecondColor =  {this.props.styles.articleSecondColor}
-                    showStylesModal = {this.props.styles.showStylesModal}
                     isLoading = {this.props.article.status == REFRESH_ARTICLE_DOING}
                     dayStyle = {this.props.styles.dayStyle}
                     articleBg =  {this.props.styles.articleBg}/>

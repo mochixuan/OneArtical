@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
         marginRight: 4,
     },
     circle_spot_children: {
-        width: 10,
-        height: 10,
+        width: 8,
+        height: 8,
         borderRadius: 6,
         backgroundColor: '#666'
     }

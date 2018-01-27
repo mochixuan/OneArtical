@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import ControlPanelView from '../components/ControlPanelView'
 import {collect, nextArticle, preArticle, randomArticle, todayArticle,switchStylesModalState} from '../action/actions'
-import {CONTROL1,CONTROL2,OTHERS} from '../constants/DataConstants'
+import {CONTROL1,CONTROL2,OTHERS,SHOW_STYLE_SETTING_MODAL,SHOW_SHARE_MODAL} from '../constants/DataConstants'
 
 const mapStateToProps = (state)=> ({
     controls: state.article.isToday?CONTROL1:[...CONTROL1,...CONTROL2],
@@ -23,6 +23,7 @@ const dealtClickItem = (dispatch,key,ownProps) => {
             dispatch(collect())
             break
         case 1:
+            dispatch(switchStylesModalState(SHOW_SHARE_MODAL))
             break
         case 2:
             dispatch(preArticle())
@@ -40,7 +41,7 @@ const dealtClickItem = (dispatch,key,ownProps) => {
             ownProps.navigation.navigate('CollectPage')
             break
         case 7:
-            dispatch(switchStylesModalState(true))
+            dispatch(switchStylesModalState(SHOW_STYLE_SETTING_MODAL))
             break
         case 8:
             ownProps.navigation.navigate('AuthorPage')

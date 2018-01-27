@@ -57,9 +57,9 @@ export const switchThemeModel = () => ({
     type: SWITCH_THEME_MODEL
 })
 
-export const switchStylesModalState = (isShow) => ({
+export const switchStylesModalState = (modalState) => ({
     type: SWITCH_STYLES_MODAL_STATE,
-    showStylesModal: isShow,
+    modalState,
 })
 
 export const hideSplash = () => ({

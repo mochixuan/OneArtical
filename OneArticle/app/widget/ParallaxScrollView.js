@@ -205,7 +205,7 @@ var styles = StyleSheet.create({
         resizeMode: 'cover'
     },
     content: {
-        shadowColor: '#222',
+        shadowColor: 'transparent',
         shadowOpacity: 0.3,
         shadowRadius: 2,
         backgroundColor: 'transparent',

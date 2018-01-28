@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "babel-preset-react-native": "2.1.0",
     "react": "16.0.0",
     "react-native": "0.51.0",
     "react-native-drawer": "^2.5.0",
@@ -21,7 +22,6 @@
   },
   "devDependencies": {
     "babel-jest": "22.0.4",
-    "babel-preset-react-native": "4.0.0",
     "jest": "22.0.4",
     "react-test-renderer": "16.0.0"
   },

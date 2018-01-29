@@ -70,8 +70,7 @@ const styles = StyleSheet.create({
     },
     mask: {
         width,
-        //必须要设置一个颜色
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent' //必须要设置一个颜色
     },
     children: {
         position: 'absolute',

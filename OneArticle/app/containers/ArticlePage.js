@@ -39,7 +39,7 @@ class ArticlePage extends Component {
                     networkActivityIndicatorVisible={false}
                 />
                 <Article
-                    articleData = {this.props.article.articleData==null?null:this.props.article.articleData.data}
+                    articleData = {this.props.article.articleData == null ? null : this.props.article.articleData.data}
                     articleFontSize = {this.props.styles.articleFontSize}
                     articleMainColor =  {this.props.styles.articleMainColor}
                     articleSecondColor =  {this.props.styles.articleSecondColor}
@@ -57,7 +57,6 @@ class ArticlePage extends Component {
             </View>
         )
     }
-
 }
 
 const styles = StyleSheet.create({

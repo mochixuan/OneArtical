@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import PropTypes from 'prop-types';
 
-export default class FontSelectorView extends View {
+export default class FontSelectorView extends Component {
 
     render() {
 

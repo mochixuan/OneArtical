@@ -101,7 +101,6 @@ class ParallaxScrollView extends Component {
                     position: 'absolute',
                     zIndex: 1,
                     backgroundColor: scrollY.interpolate({
-                        //inputRange: [-windowHeight, windowHeight * DEFAULT_WINDOW_MULTIPLIER, windowHeight * 0.8],
                         inputRange: [0 ,windowHeight-DEFAULT_NAVBAR_HEIGHT,windowHeight],
                         outputRange: ['transparent',navBarColor,navBarColor]
                     })
@@ -170,6 +169,7 @@ class ParallaxScrollView extends Component {
             </View>
         );
     }
+
 }
 
 ParallaxScrollView.defaultProps = {

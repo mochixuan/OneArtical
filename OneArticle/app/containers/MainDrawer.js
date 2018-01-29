@@ -22,10 +22,6 @@ class MainDrawer extends Component {
         )
     }
 
-    isOpen() {
-        return this.drawer._open
-    }
-
     onPenDrawer() {
         this.drawer.open()
     }
@@ -34,18 +30,5 @@ class MainDrawer extends Component {
     }
 
 }
-
-const mapStateToProps = (()=>{
-
-})
-
-const mapDispatchToProps = () => ({
-    onPenDrawer: ()=>{
-
-    },
-    onCloseDrawer: ()=> {
-
-    }
-})
 
 export default connect()(MainDrawer)

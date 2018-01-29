@@ -6,6 +6,7 @@ import {
     Dimensions,
     TouchableOpacity,
     Image,
+    ScrollView
 } from 'react-native'
 import {ParallaxScrollView,DEFAULT_NAVBAR_HEIGHT} from '../widget/ParallaxScrollView'
 
@@ -21,20 +22,20 @@ export default class Article extends Component {
                 navBarColor={this.props.articleBg}
                 isShowLoading={this.props.isLoading}
                 navBarTitleColor = {this.props.articleSecondColor}
-                //leftView={this._renderNavBarLeftView()}
-                //rightView={this._renderNavBarRightView()}
                 headerView={this._renderNavBarHeaderView()}>
                 {this._renderMainView()}
             </ParallaxScrollView>
         )
     }
 
+
+
     _renderMainView() {
-        let mainView = <View style={[styles.constants_empty,{backgroundColor: this.props.articleBg}]}/>
+        let mainView = <View style={[styles.container_empty,{backgroundColor: this.props.articleBg}]}/>
         let maskLineColor = this.props.dayStyle?'#dcdcdc':'#454746'
         if (this.props.articleData != null) {
             mainView = (
-                <View style={[styles.constants,{
+                <View style={[styles.container,{
                     backgroundColor: this.props.articleBg}]}>
                     <Text style={[styles.title,{
                         fontSize: this.props.articleFontSize+4,
@@ -113,7 +114,7 @@ export default class Article extends Component {
 }
 
 const styles = StyleSheet.create({
-    constants: {
+    container: {
         flex: 1,
         width,
         alignItems: 'center',
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
         paddingRight: 12,
 
     },
-    constants_empty: {
+    container_empty: {
         flex: 1,
         width,
         height,

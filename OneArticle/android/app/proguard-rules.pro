@@ -68,3 +68,16 @@
 -dontwarn java.nio.file.*
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
+
+# share
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
+
+# text
+-keep class android.text {*;}
+-dontwarn android.text.*
+
+# scrollview
+-keep class android.text {*;}
+-dontwarn android.text.*

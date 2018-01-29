@@ -23,10 +23,6 @@ const {width} = Dimensions.get('window')
 
 export default class ModalSettings extends Component {
 
-    componentWillMount() {
-
-    }
-
     render() {
         const modalState = this.props.styles.modalState
         return (
@@ -41,21 +37,31 @@ export default class ModalSettings extends Component {
         )
     }
 
+
+    /*
+    * bgColor: PropTypes.string,
+    defaultBgColor: PropTypes.string,
+    onChangeItem: PropTypes.func,
+    defaultTextColor: PropTypes.string,
+    textColor: PropTypes.string,
+    fontItems: PropTypes.func,
+    curIndex: PropTypes.number,
+    * */
+
     _renderStyleSettingView() {
         return (
             <View style={[styles.container,{backgroundColor: this.props.styles.articleBg}]}>
                 <View style={styles.item_view}>
                     <Text style={styles.item_descri}>字号</Text>
                     <FontSelectorView
-                        defaultTextColor = {this.props.styles.dayStyle?'#333333':'#333333'}
-                        textColor = {this.props.styles.dayStyle?'#f5f5f5':'#e0e0e0'}
-                        bgColor = {this.props.styles.dayStyle?'#333333':'#444444'}
+                        defaultTextColor = {this.props.styles.dayStyle ? '#333333':'#333333'}
+                        textColor = {this.props.styles.dayStyle ? '#f5f5f5':'#e0e0e0'}
+                        bgColor = {this.props.styles.dayStyle ? '#333333':'#444444'}
                         defaultBgColor = {this.props.styles.dayStyle?'#f5f5f5':'#949494'}
                         curIndex={this.props.styles.fontSizeIndex}
                         onChangeItem = {(index)=>{
                             this.props.changeFontSize(index)
-                        }}
-                    />
+                        }}/>
                 </View>
                 <View style={styles.item_view}>
                     <Text style={styles.item_descri}>背景</Text>
@@ -105,24 +111,23 @@ export default class ModalSettings extends Component {
                 const options = {
                     type: 'news',
                     thumbImage: resolveAssetSource(require('../data/img/icon.png')).uri,
-                    webpageUrl: 'https://fir.im/gc58',
+                    webpageUrl: 'http://fir.im/onearticle',
                     title: "OneArticle",
-                    //description: "不用登录注册，没有复杂的算法，不猜你喜欢。和你一样我们喜欢简单，相信优美文字的力量，并乐于坚持。",
                     description: "原版名为:观止 可去应用市场下载。此为练习Redux全家桶的项目,作者: MoChiXuan。",
                 }
                 if (isWeChat) {
                     WetChatShare.shareToSession(options)
                         .then((data)=>{
-                            show("分享成功: "+data)
+                            show("分享成功")
                         }).catch((error)=>{
-                            show("分享失败: "+error)
+                            show("分享失败")
                         })
                 } else {
                     WetChatShare.shareToTimeline(options)
                         .then((data)=>{
-                            show("分享成功: "+data)
+                            show("分享成功")
                         }).catch((error)=>{
-                        show("分享失败: "+error)
+                        show("分享失败")
                     })
                 }
             })
@@ -188,8 +193,6 @@ export default class ModalSettings extends Component {
             </View>
         )
     }
-
-
 
 }
 

@@ -22,11 +22,15 @@ export default class AppWebView extends Component {
     }
 
     componentWillMount() {
-        this.addBackAndroidListener(this.props.navigation)
+        if (Platform.OS === "android") {
+            BackHandler.addEventListener('hardwareBackPress',this.onBackAndroid)
+        }
     }
 
     componentWillUnMount() {
-
+        if (Platform.OS === "android") {
+            BackHandler.removeEventListener('hardwareBackPress')
+        }
     }
 
     render() {
@@ -50,12 +54,6 @@ export default class AppWebView extends Component {
     }
 
     //监听原生返回键事件
-    addBackAndroidListener(e) {
-        if (Platform.OS === "android") {
-            BackHandler.addEventListener('hardwareBackPress',this.onBackAndroid)
-        }
-    }
-
     onBackAndroid = () => {
         if (this.state.canGoBack) {
             this.refs[WEB_VIEW].goBack();

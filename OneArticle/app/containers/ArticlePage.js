@@ -18,7 +18,11 @@ const {width} = Dimensions.get('window')
 class ArticlePage extends Component {
 
     componentDidMount() {
-        this.props.todayArticle()
+        //数据请求做一个短暂的延迟处理，几乎没有影响都速度，
+        //原因，persist初始化数据需要时间，你可以打印log就知道了
+        setTimeout(()=>{
+            this.props.todayArticle()
+        },10)
     }
 
     shouldComponentUpdate(nextProps,nextState) {

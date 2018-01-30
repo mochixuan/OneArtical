@@ -64,7 +64,6 @@ const isCollectedCurArticle = (article,articleData) => {
         if (index != -1)
             return true
     } catch (error) {
-
     }
     return false
 }
@@ -98,7 +97,8 @@ function* dealtData(action) {
             }
         }
     }
-    console.log("articleData",articleData)
+    //console.log("articleData",articleData)
+    //console.log("article",article)
     if (articleData != null && articleData.data != null) {
         const isToday = (getCurSystemTime() === articleData.data.date.curr)
         const isCollected = isCollectedCurArticle(article,articleData)

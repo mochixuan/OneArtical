@@ -1,3 +1,4 @@
+
 const logger = store => next => action => {
     if (typeof action === 'function') console.log('dispatching a function');
     else console.log('loggerMiddleware dispatch',action);

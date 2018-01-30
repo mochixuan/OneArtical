@@ -37,17 +37,6 @@ export default class ModalSettings extends Component {
         )
     }
 
-
-    /*
-    * bgColor: PropTypes.string,
-    defaultBgColor: PropTypes.string,
-    onChangeItem: PropTypes.func,
-    defaultTextColor: PropTypes.string,
-    textColor: PropTypes.string,
-    fontItems: PropTypes.func,
-    curIndex: PropTypes.number,
-    * */
-
     _renderStyleSettingView() {
         return (
             <View style={[styles.container,{backgroundColor: this.props.styles.articleBg}]}>

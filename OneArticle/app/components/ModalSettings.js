@@ -88,7 +88,7 @@ export default class ModalSettings extends Component {
         }
         if (this.isInitShare == null) {
             this.isInitShare = true
-            WetChatShare.registerApp("wxb808075ab1e17922")
+            WetChatShare.registerApp("wx925531cfab9f478a")
         }
         WetChatShare.isWXAppInstalled()
             .then((isInstalled)=>{
